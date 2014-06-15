@@ -29,10 +29,17 @@ var Post = mongoose.model('Post', postSchema);
 
 //start web server
 
-// var startWebServer = function (posts) {
 var app = express();
 
-//serve up index.html on root
+//HOME PAGE
+app.get('/', function(request,response){
+  response.sendfile('src/index.html');
+});
+
+//SERVE .css AND .js files
+app.use('/static', express.static(__dirname + '/public'));
+
+
 app.get('/posts', function(request,response) {
 
   //find all posts and send them back as the response
