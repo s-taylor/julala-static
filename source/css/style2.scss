@@ -1,0 +1,11 @@
+$black: #f0f0f0;
+
+h1 {
+  color: pink;
+  ul {
+    color: orange;
+    li {
+      color: $black;
+    }
+  }
+}

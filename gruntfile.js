@@ -9,51 +9,88 @@ module.exports = function(grunt) {
 
     //clean the build directory
     clean: {
+      //FOR BUILD
       build: {
         src: [ 'build' ]
       },
+      scripts_not_app: {
+        src: [ 'build/js/*', '!build/js/application.js' ]
+      },
+      //FOR DIST
+      dist: {
+        src: [ 'dist' ]
+      },
+      //FOR GRUNT WATCH
       sheets: {
-        src: [ 'build/css/*.css' ]
+        src: [ 'build/css/**' ]
       },
       scripts: {
-        src: [ 'build/js/*.js' ]
+        src: [ 'build/js/**' ]
       }
     },
 
     //copy files from the source directory to the build directory
     copy: {
-      build: {
+      //FOR BUILD
+      html: {
         cwd: 'source',
-        src: [ '**' ],
+        src: [ '**/*.html' ],
         dest: 'build',
         expand: true
       },
       sheets: {
         cwd: 'source/css',
-        src: [ '**' ],
+        src: [ '**','!**/*.scss' ],
         dest: 'build/css',
         expand: true
       },
       scripts: {
         cwd: 'source/js',
-        src: [ '**' ],
+        src: [ '**','!**/*.coffee' ],
         dest: 'build/js',
         expand: true
-      }
+      },
+      lib: {
+        cwd: 'source/lib',
+        src: [ '**' ],
+        dest: 'build/lib',
+        expand: true
+      },
+      //FOR DIST
+      dist: {
+        cwd: 'build',
+        src: [ '**/*.html', 'lib/**' ],
+        dest: 'dist',
+        expand: true
+      },
     },
 
     //---------------------
     // JAVASCRIPT - MINIFY
     //---------------------
 
+    //compile coffeescript (and move to the build directory)
+    coffee: {
+      build: {
+        expand: true,
+        cwd: 'source/js',
+        src: [ '**/*.coffee' ],
+        dest: 'build/js',
+        ext: '.js'
+      }
+    },
+
     //combines multiple javascript files into a single file
     concat: {
       options: {
-        separator: ';'
+        //this creates a seperator between files with the filename in the comment
+        process: function(src, filepath) {
+          return '//####' + filepath + '\n' + src;
+        }
       },
       scripts: {
-        src: ['build/js/*.js'],
-        dest: 'build/application.js'
+        src: ['build/js/**/*.js'],
+        dest: 'build/js/application.js'
       }
     },
 
@@ -61,11 +98,12 @@ module.exports = function(grunt) {
     uglify: {
       options: {
         // the banner is inserted at the top of the output
-        banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> */\n',
+        banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> */\n'
+        // compress: true
       },
       scripts: {
         files: {
-          'build/application.min.js': ['<%= concat.scripts.dest %>']
+          'dist/js/application.js': ['<%= concat.scripts.dest %>']
         }
       }
     },
@@ -74,6 +112,19 @@ module.exports = function(grunt) {
     // CSS - BUILD
     //-------------
 
+    //compile scss (and move to the build directory)
+    sass: {
+      dist: {
+        files: [{
+          expand: true,
+          cwd: 'source/css',
+          src: ['*.scss'],
+          dest: 'build/css',
+          ext: '.css'
+        }]
+      }
+    },
+
     //minifies and combines css files
     cssmin: {
       add_banner: {
@@ -81,7 +132,7 @@ module.exports = function(grunt) {
           banner: '/* My minified css file */'
         },
         files: {
-          'build/application.min.css': ['build/css/*.css']
+          'dist/css/application.css': ['build/css/*.css']
         }
       }
     },
@@ -104,28 +155,46 @@ module.exports = function(grunt) {
 
   });
 
-  //allows the tasks to be run individually
+  //file manipulation
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-copy');
+  //javascript
+  grunt.loadNpmTasks('grunt-contrib-coffee');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-uglify');
+  //css
+  grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
+  //auto update
   grunt.loadNpmTasks('grunt-contrib-watch');
 
   //allow updating of javascript files
+  // grunt.registerTask(
+  //   'scripts', 
+  //   'Update javascript files in build', 
+  //   [ 'clean:scripts', 'copy:scripts', 'concat', 'uglify' ]
+  // );
+
+  // //allow updating of javascript files
+  // grunt.registerTask(
+  //   'sheets', 
+  //   'Update stylesheet files in build', 
+  //   [ 'clean:sheets', 'copy:sheets', 'cssmin' ]
+  // );
+
+  //populate the build folder copying/compiling the latest source files
   grunt.registerTask(
-    'scripts', 
-    'Update javascript files in build', 
-    [ 'clean:scripts', 'copy:scripts', 'concat', 'uglify' ]
+    'build', 
+    'generate the build directory', 
+    [ 'clean:build', 'copy', 'coffee', 'sass', 'concat','clean:scripts_not_app' ]
   );
 
-  //allow updating of javascript files
   grunt.registerTask(
-    'sheets', 
-    'Update stylesheet files in build', 
-    [ 'clean:sheets', 'copy:sheets', 'cssmin' ]
+    'dist', 
+    'generate the dist directory', 
+    [ 'clean:dist','cssmin','uglify', 'copy:dist' ]
   );
 
-  grunt.registerTask('default', ['clean:build','copy:build','concat','uglify','cssmin']);
+  grunt.registerTask('default', ['build','dist']);
 
 };
