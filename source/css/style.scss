@@ -1,0 +1,209 @@
+/* http://colorschemedesigner.com/#3R11TqVu-w0w0 */
+
+/* NEW DESIGN */
+/* http://sixrevisions.com/design-showcase-inspiration/50-beautiful-clean-and-simple-web-designs/ */
+/* nav background, second heading (span) - rgb(33,42,56) - very dark blue PREVIOUSLY: #38467B; */
+/* background color - rgb(237,237,237) - gray */
+/* primary heading, page headings - rgb(22,145,216) - light blue */
+/* border color - white */
+/* link hover background - rgb(62,76,95) */
+/* text color - rgb(60,60,60) - dark gray */
+
+//Color Scheme
+$dark-blue: rgb(33,42,56);
+$light-blue: rgb(22,145,216);
+
+$gray: rgb(237,237,237);
+$dark-gray: rgb(60,60,60);
+$blue-gray: rgb(62,76,95);
+
+//Font
+//$font: 'Montez', cursive;
+$font: 'The Girl Next Door', cursive;
+
+body {
+  background-color: $gray;
+}
+
+/* NAVIGATION */
+
+#nav-container {
+  background-color: $dark-blue;
+}
+
+nav {
+  margin: 0 auto;
+  width: 960px;
+  a {
+    display: inline-block;
+    padding: 10px;
+    text-decoration: none;
+    color: white;
+    font-family: $font;
+    font-size: 20px;
+  }//a
+
+  a:hover {
+    background-color: $light-blue;
+  } //a:hover
+}//nav
+
+/* CONTAINER */
+
+#container {
+  max-width: 960px;
+  margin: 20px auto;
+}
+
+h1 {
+  margin: 0;
+  padding: 15px 10px;
+  color: $light-blue;
+  font-size: 60px;
+  font-family: $font;
+}
+
+h1 span.color {
+  color: $dark-blue;
+}
+
+#content{
+  border: 5px solid white;
+  /*box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);*/
+}
+
+h2#content-heading {
+  margin: 0;
+  padding: 10px 0;
+  background-color: white;
+  text-align: center;
+  color: $light-blue;
+}
+
+#content-main {
+  padding: 10px;
+}
+
+p.legal {
+  background-color: white;
+  padding: 5px 0 0 0;
+  margin: 0;
+  text-align: center;
+  font-size: 9px;
+}
+
+/* ------------------------------------------------------------------------------------- */
+
+/* HOME PAGE */
+
+.pad-btm {
+  margin-bottom: 10px;
+}
+
+div.tuition-wrapper {
+  display: inline-block;
+  width:645px; 
+  margin: 0; 
+  padding: 0; 
+
+  div.welcome {
+    background-color: white;
+    padding: 7px 0;
+    text-align: center;
+    color: $dark-gray;
+
+    span {
+      font-size: 20px;
+      font-weight: bold;
+      line-height: 150%;
+    }
+  }
+
+  a.tuition-link {
+    text-decoration: none;
+    color: $dark-gray;
+
+    div.tuition {
+      display: inline-block;
+      background-color: white;
+      width: 645px;
+
+      &:hover {
+        background-color: $blue-gray;
+        color: white;
+      }//:hover
+
+      img.image {
+        display:inline-block;
+        height: 108px;
+        /* BLACK AND WHITE */
+        -webkit-filter: saturate(0%);
+        filter: saturate(0%);
+        /* REMOVES WHITE SPACE FROM BOTTOM OF IMAGE */
+        vertical-align: text-bottom;
+
+        &:hover {
+          -webkit-filter: saturate(100%);
+          filter: saturate(100%);
+        }//:hover
+      }//img.image
+
+      div.tuition-text {
+        display: inline-block;
+        vertical-align: top;
+        padding-left: 20px;
+        padding-right: 20px;
+      }//div.tuition-text
+
+    }//div.tuition
+  }//div.tuition-link
+}//div.tuition-wrapper
+
+div.album {
+  display: inline-block;
+  vertical-align: top;
+  width: 275px;
+  margin-left: 10px;
+  // background-color: white;
+  background-color: $dark-blue;
+
+  img {
+    width: 255px;
+    border: 10px solid $dark-blue;
+    display: block;
+  }//img
+
+  p {
+    margin: 0;
+    padding-bottom: 10px;
+    color: white;
+    text-align: center;
+    font-size: 12px;
+  }
+}//div.album
+
+/* OTHER PAGES */
+div.white-box {
+  margin: 0;
+  padding: 10px;
+  background-color: white;
+
+  p {
+    padding: 0;
+    margin: 10px;
+    color: $dark-gray;
+  }//p
+}//div.white-box
+
+/* CALENDAR */
+table.calendar {
+  margin: 0 auto;
+
+  td {
+    //border: 5px solid $dark-blue;
+    border: 5px solid $blue-gray;
+    padding: 5px 20px 5px 5px;
+    background-color: white;
+    color: $dark-blue;
+  }
+}

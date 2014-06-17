@@ -24,6 +24,9 @@ module.exports = function(grunt) {
         src: [ 'dist' ]
       },
       //FOR GRUNT WATCH
+      html: {
+        src: [ 'build/*.html' ]
+      },
       sheets: {
         src: [ 'build/css/**' ]
       },
@@ -156,6 +159,10 @@ module.exports = function(grunt) {
 
     //watch for changes to source folders and run specified task
     watch: {
+      html: {
+        files: 'source/*.html',
+        tasks: [ 'html' ]
+      },
       sheets: {
         files: 'source/css/**',
         tasks: [ 'sheets' ]
@@ -183,6 +190,13 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
 
   //-------------------------------------------------------------------------
+
+  //allow updating of html files
+  grunt.registerTask(
+    'html', 
+    'Update html files in build', 
+    [ 'clean:html', 'copy:html' ]
+  );
 
   //allow updating of javascript files
   grunt.registerTask(
