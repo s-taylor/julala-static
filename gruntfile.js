@@ -13,8 +13,11 @@ module.exports = function(grunt) {
       build: {
         src: [ 'build' ]
       },
-      scripts_not_app: {
+      js_files: {
         src: [ 'build/js/*', '!build/js/application.js' ]
+      },
+      css_files: {
+        src: [ 'build/css/*', '!build/css/application.css' ]
       },
       //FOR DIST
       dist: {
@@ -62,7 +65,7 @@ module.exports = function(grunt) {
         src: [ '**/*.html', 'lib/**' ],
         dest: 'dist',
         expand: true
-      },
+      }
     },
 
     //---------------------
@@ -82,13 +85,23 @@ module.exports = function(grunt) {
 
     //combines multiple javascript files into a single file
     concat: {
-      options: {
-        //this creates a seperator between files with the filename in the comment
-        process: function(src, filepath) {
-          return '//####' + filepath + '\n' + src;
-        }
+      sheets: {
+        options: {
+          //this creates a seperator between files with the filename in the comment
+          process: function(src, filepath) {
+            return '/*####' + filepath + '*/' + '\n' + src;
+          }
+        },
+        src: ['build/css/**/*.css'],
+        dest: 'build/css/application.css'
       },
       scripts: {
+        options: {
+          //this creates a seperator between files with the filename in the comment
+          process: function(src, filepath) {
+            return '//####' + filepath + '\n' + src;
+          }
+        },
         src: ['build/js/**/*.js'],
         dest: 'build/js/application.js'
       }
@@ -132,7 +145,7 @@ module.exports = function(grunt) {
           banner: '/* My minified css file */'
         },
         files: {
-          'dist/css/application.css': ['build/css/*.css']
+          'dist/css/application.css': ['build/css/application.css']
         }
       }
     },
@@ -164,37 +177,69 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   //css
   grunt.loadNpmTasks('grunt-contrib-sass');
+  grunt.loadNpmTasks('grunt-autoprefixer');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   //auto update
   grunt.loadNpmTasks('grunt-contrib-watch');
 
+  //-------------------------------------------------------------------------
+
   //allow updating of javascript files
-  // grunt.registerTask(
-  //   'scripts', 
-  //   'Update javascript files in build', 
-  //   [ 'clean:scripts', 'copy:scripts', 'concat', 'uglify' ]
-  // );
+  grunt.registerTask(
+    'scripts', 
+    'Update javascript files in build', 
+    [ 'clean:scripts', 'copy:scripts', 'coffee', 'concat:scripts', 'clean:js_files' ]
+  );
 
   // //allow updating of javascript files
-  // grunt.registerTask(
-  //   'sheets', 
-  //   'Update stylesheet files in build', 
-  //   [ 'clean:sheets', 'copy:sheets', 'cssmin' ]
-  // );
+  grunt.registerTask(
+    'sheets', 
+    'Update stylesheet files in build', 
+    [ 'clean:sheets', 'copy:sheets', 'sass', 'concat:sheets', 'clean:css_files' ]
+  );
 
-  //populate the build folder copying/compiling the latest source files
+  //-------------------------------------------------------------------------
+
+  grunt.registerTask(
+    'copy_build', 
+    'perform copy operations for build (ignore dist copy)', 
+    [ 'copy:html', 'copy:sheets', 'copy:scripts', 'copy:lib' ]
+  );
+
   grunt.registerTask(
     'build', 
     'generate the build directory', 
-    [ 'clean:build', 'copy', 'coffee', 'sass', 'concat','clean:scripts_not_app' ]
+    [ 'clean:build', 'copy_build', 'coffee', 'sass', 'concat', 'clean:js_files', 'clean:css_files' ]
   );
 
   grunt.registerTask(
     'dist', 
     'generate the dist directory', 
-    [ 'clean:dist','cssmin','uglify', 'copy:dist' ]
+    [ 'clean:dist', 'copy:dist', 'cssmin','uglify' ]
   );
 
   grunt.registerTask('default', ['build','dist']);
 
 };
+
+//ADDONS TO EXPLORE/
+
+//HTMLHint
+//autoprefixer
+
+// htmlhint: {
+//   build: {
+//     options: {
+//       'tag-pair': true,
+//       'tagname-lowercase': true,
+//       'attr-lowercase': true,
+//       'attr-value-double-quotes': true,
+//       'doctype-first': true,
+//       'spec-char-escape': true,
+//       'id-unique': true,
+//       'head-script-disabled': true,
+//       'style-disabled': true
+//     },
+//     src: ['index.html']
+//   }
+// }
