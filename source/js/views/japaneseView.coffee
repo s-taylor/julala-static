@@ -1,5 +1,5 @@
 Julala.Views.japaneseView = Backbone.View.extend(
-  el: "#content-main"
+  el: "#output"
   
   initialize: ->
     @template = _.template($("#japaneseView").html())

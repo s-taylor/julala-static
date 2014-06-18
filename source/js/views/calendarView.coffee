@@ -1,5 +1,5 @@
 Julala.Views.calendarView = Backbone.View.extend(
-  el: "#content-main"
+  el: "#output"
   
   initialize: ->
     @template = _.template($("#calendarView").html())

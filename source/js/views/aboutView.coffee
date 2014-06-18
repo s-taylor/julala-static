@@ -1,5 +1,5 @@
 Julala.Views.aboutView = Backbone.View.extend(
-  el: "#content-main"
+  el: "#output"
   
   initialize: ->
     @template = _.template($("#aboutView").html())

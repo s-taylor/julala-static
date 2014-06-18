@@ -1,5 +1,5 @@
 Julala.Views.musicView = Backbone.View.extend(
-  el: "#content-main"
+  el: "#output"
   
   initialize: ->
     @template = _.template($("#musicView").html())

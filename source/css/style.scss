@@ -26,26 +26,27 @@ body {
 
 /* NAVIGATION */
 
-#nav-container {
+#navbar {
   background-color: $dark-blue;
-}
 
-nav {
-  margin: 0 auto;
-  width: 960px;
-  a {
-    display: inline-block;
-    padding: 10px;
-    text-decoration: none;
-    color: white;
-    font-family: $font;
-    font-size: 20px;
-  }//a
+  nav {
+    margin: 0 auto;
+    width: 960px;
 
-  a:hover {
-    background-color: $light-blue;
-  } //a:hover
-}//nav
+    a {
+      display: inline-block;
+      padding: 10px;
+      text-decoration: none;
+      color: white;
+      font-family: $font;
+      font-size: 20px;
+
+      &:hover {
+        background-color: $light-blue;
+      }//a:hover
+    }//a
+  }//nav
+}//navbar
 
 /* CONTAINER */
 
@@ -69,19 +70,21 @@ nav {
 
   #content{
     border: 5px solid white;
-    /*box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);*/
 
-    h2#content-heading {
-      margin: 0;
-      padding: 10px 0;
-      background-color: white;
-      text-align: center;
-      color: $light-blue;
-    }
+    //where the backbone view is rendered
+    #output {
+      #heading {
+        margin: 0;
+        padding: 10px 0;
+        background-color: white;
+        text-align: center;
+        color: $light-blue;
+      }
 
-    #content-main {
-      padding: 10px;
-    }
+      #main {
+        padding: 10px;
+      }
+    }//#output
 
     p.legal {
       background-color: white;
@@ -101,13 +104,13 @@ nav {
   margin-bottom: 10px;
 }
 
-div.tuition-wrapper {
+.tuition-wrapper {
   display: inline-block;
   width:645px; 
   margin: 0; 
   padding: 0; 
 
-  div.welcome {
+  .welcome {
     background-color: white;
     padding: 7px 0;
     text-align: center;
@@ -120,11 +123,11 @@ div.tuition-wrapper {
     }
   }
 
-  a.tuition-link {
+  .tuition-link {
     text-decoration: none;
     color: $dark-gray;
 
-    div.tuition {
+    .tuition {
       display: inline-block;
       background-color: white;
       width: 645px;
@@ -135,11 +138,10 @@ div.tuition-wrapper {
         color: white;
       }//.mouseover
 
-      img.image {
+      img {
         display:inline-block;
         height: 108px;
         /* BLACK AND WHITE */
-        // -webkit-filter: saturate(0%);
         filter: saturate(0%);
         /* REMOVES WHITE SPACE FROM BOTTOM OF IMAGE */
         vertical-align: text-bottom;
@@ -147,18 +149,18 @@ div.tuition-wrapper {
         &.mouseover {
           filter: saturate(100%);
         }//.mouseover
-      }//img.image
+      }//img
 
-      div.tuition-text {
+      .tuition-text {
         display: inline-block;
         vertical-align: top;
-        padding-left: 20px;
-        padding-right: 20px;
-      }//div.tuition-text
-
-    }//div.tuition
-  }//div.tuition-link
-}//div.tuition-wrapper
+        max-width: 501px;
+        padding-left: 18px;
+        padding-right: 18px;
+      }//tuition-text
+    }//tuition
+  }//tuition-link
+}//tuition-wrapper
 
 div.album {
   display: inline-block;
