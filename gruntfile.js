@@ -71,21 +71,6 @@ module.exports = function(grunt) {
       }
     },
 
-    //---------------------
-    // JAVASCRIPT - MINIFY
-    //---------------------
-
-    //compile coffeescript (and move to the build directory)
-    coffee: {
-      build: {
-        expand: true,
-        cwd: 'source/js',
-        src: [ '**/*.coffee' ],
-        dest: 'build/js',
-        ext: '.js'
-      }
-    },
-
     //combines multiple javascript files into a single file
     concat: {
       sheets: {
@@ -96,7 +81,7 @@ module.exports = function(grunt) {
           }
         },
         src: ['build/css/**/*.css'],
-        dest: 'build/css/application.css'
+        dest: 'build/css/application-noprefix.css'
       },
       scripts: {
         options: {
@@ -107,6 +92,21 @@ module.exports = function(grunt) {
         },
         src: ['build/js/**/*.js'],
         dest: 'build/js/application.js'
+      }
+    },
+
+    //------------
+    // JAVASCRIPT
+    //------------
+
+    //compile coffeescript (and move to the build directory)
+    coffee: {
+      build: {
+        expand: true,
+        cwd: 'source/js',
+        src: [ '**/*.coffee' ],
+        dest: 'build/js',
+        ext: '.js'
       }
     },
 
@@ -124,9 +124,9 @@ module.exports = function(grunt) {
       }
     },
 
-    //-------------
-    // CSS - BUILD
-    //-------------
+    //-----
+    // CSS 
+    //-----
 
     //compile scss (and move to the build directory)
     sass: {
@@ -139,6 +139,14 @@ module.exports = function(grunt) {
           ext: '.css'
         }]
       }
+    },
+
+    //add browser specific prefixes
+    autoprefixer: {
+      single_file: {
+        src: 'build/css/application-noprefix.css',
+        dest: 'build/css/application.css'
+      },
     },
 
     //minifies and combines css files
@@ -209,7 +217,7 @@ module.exports = function(grunt) {
   grunt.registerTask(
     'sheets', 
     'Update stylesheet files in build', 
-    [ 'clean:sheets', 'copy:sheets', 'sass', 'concat:sheets', 'clean:css_files' ]
+    [ 'clean:sheets', 'copy:sheets', 'sass', 'concat:sheets', 'autoprefixer', 'clean:css_files' ]
   );
 
   //-------------------------------------------------------------------------
@@ -223,7 +231,7 @@ module.exports = function(grunt) {
   grunt.registerTask(
     'build', 
     'generate the build directory', 
-    [ 'clean:build', 'copy_build', 'coffee', 'sass', 'concat', 'clean:js_files', 'clean:css_files' ]
+    [ 'clean:build', 'copy_build', 'coffee', 'sass', 'concat', 'autoprefixer', 'clean:js_files', 'clean:css_files' ]
   );
 
   grunt.registerTask(

@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>My Grunt Build Testing</title>
   <link rel="stylesheet" href="lib/normalize.css">
+  <link href='http://fonts.googleapis.com/css?family=Montez' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="css/application.css">
 </head>
 <body>
@@ -20,28 +21,28 @@
   <script id="appView" type="text/template">
     <div id="nav-container">
       <nav>
-        <a href="/"><i class="fa fa-home"></i> Home</a>
-        <a href="/about"><i class="fa fa-question-circle"></i> About Julala</a>
-        <a href="/japanese"><i class="fa fa-comment-o"></i> Japanese Tuition</a>
-        <a href="/music"><i class="fa fa-music"></i> Music Tuition</a>
-        <a href="/calendar"><i class="fa fa-calendar"></i> Calendar</a>
-        <a href="/contact"><i class="fa fa-envelope"></i> Contact</a>
+        <a href="#"><i class="fa fa-home"></i> Home</a>
+        <a href="#about"><i class="fa fa-question-circle"></i> About Julala</a>
+        <a href="#japanese"><i class="fa fa-comment-o"></i> Japanese Tuition</a>
+        <a href="#music"><i class="fa fa-music"></i> Music Tuition</a>
+        <a href="#calendar"><i class="fa fa-calendar"></i> Calendar</a>
+        <a href="#contact"><i class="fa fa-envelope"></i> Contact</a>
       </nav>
     </div>
 
     <div id="container">
-    <h1>Julala's <span class="color">Tuition</span></h1>
+      <h1>Julala's <span class="color">Tuition</span></h1>
 
-    <div id="content">
-      <h2 id="content-heading"><%= @title %></h2>
+      <div id="content">
+        <h2 id="content-heading"><%= @title %></h2>
 
-      <div id="content-main">
-        <%= yield %>
-      </div> <!-- content-main -->
+        <div id="content-main">
+          <%= yield %>
+        </div> <!-- content-main -->
 
-      <p class="legal">93 Made Pty Ltd © 2009-14. All Rights Reserved. ABN 43 130 700 284 (ACN 130 700 284)</p>
-    </div> <!-- content -->
-  </div> <!-- container -->
+        <p class="legal">93 Made Pty Ltd © 2009-14. All Rights Reserved. ABN 43 130 700 284 (ACN 130 700 284)</p>
+      </div> <!-- content -->
+    </div> <!-- container -->
   </script>
 
   <!-- HOME VIEW -->
@@ -50,7 +51,7 @@
     <div class="tuition-wrapper">
       <div class="welcome pad-btm"><span>Welcome to Julala's tuition!</span><br>We provide Piano and Japanese tuition in the Sydney Area</div>
 
-      <a class="tuition-link" href="/music">
+      <a class="tuition-link" href="#music">
         <div class="tuition pad-btm">
           <img class="image" src="http://s27.postimg.org/ucpf9u7ur/piano_small.jpg" alt="piano"
           ><div class="tuition-text">
@@ -60,7 +61,7 @@
         </div> <!-- tuition -->
       </a>
 
-      <a class="tuition-link" href="/japanese">
+      <a class="tuition-link" href="#japanese">
         <div class="tuition">
           <img class="image" src="http://s7.postimg.org/hmmcqx67f/ilovejapan_small.jpg" alt="japanese"
           ><div class="tuition-text">

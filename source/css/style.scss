@@ -12,14 +12,13 @@
 //Color Scheme
 $dark-blue: rgb(33,42,56);
 $light-blue: rgb(22,145,216);
-
 $gray: rgb(237,237,237);
 $dark-gray: rgb(60,60,60);
 $blue-gray: rgb(62,76,95);
 
 //Font
-//$font: 'Montez', cursive;
-$font: 'The Girl Next Door', cursive;
+$font: "Comic Sans MS", cursive;
+// $font: 'The Girl Next Door', cursive;
 
 body {
   background-color: $gray;
@@ -53,44 +52,46 @@ nav {
 #container {
   max-width: 960px;
   margin: 20px auto;
-}
 
-h1 {
-  margin: 0;
-  padding: 15px 10px;
-  color: $light-blue;
-  font-size: 60px;
-  font-family: $font;
-}
+  //JULALA'S TUITION HEADING
+  h1 {
+    margin: 0;
+    padding: 15px 10px;
+    // text-align: center;
+    color: $light-blue;
+    font-size: 60px;
+    font-family: $font;
+  }
 
-h1 span.color {
-  color: $dark-blue;
-}
+  h1 span.color {
+    color: $dark-blue;
+  }
 
-#content{
-  border: 5px solid white;
-  /*box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);*/
-}
+  #content{
+    border: 5px solid white;
+    /*box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);*/
 
-h2#content-heading {
-  margin: 0;
-  padding: 10px 0;
-  background-color: white;
-  text-align: center;
-  color: $light-blue;
-}
+    h2#content-heading {
+      margin: 0;
+      padding: 10px 0;
+      background-color: white;
+      text-align: center;
+      color: $light-blue;
+    }
 
-#content-main {
-  padding: 10px;
-}
+    #content-main {
+      padding: 10px;
+    }
 
-p.legal {
-  background-color: white;
-  padding: 5px 0 0 0;
-  margin: 0;
-  text-align: center;
-  font-size: 9px;
-}
+    p.legal {
+      background-color: white;
+      padding: 5px 0 0 0;
+      margin: 0;
+      text-align: center;
+      font-size: 9px;
+    }
+  }//content
+}//container
 
 /* ------------------------------------------------------------------------------------- */
 
@@ -128,24 +129,24 @@ div.tuition-wrapper {
       background-color: white;
       width: 645px;
 
-      &:hover {
+      //for hovering over tuition-link
+      &.mouseover {
         background-color: $blue-gray;
         color: white;
-      }//:hover
+      }//.mouseover
 
       img.image {
         display:inline-block;
         height: 108px;
         /* BLACK AND WHITE */
-        -webkit-filter: saturate(0%);
+        // -webkit-filter: saturate(0%);
         filter: saturate(0%);
         /* REMOVES WHITE SPACE FROM BOTTOM OF IMAGE */
         vertical-align: text-bottom;
 
-        &:hover {
-          -webkit-filter: saturate(100%);
+        &.mouseover {
           filter: saturate(100%);
-        }//:hover
+        }//.mouseover
       }//img.image
 
       div.tuition-text {

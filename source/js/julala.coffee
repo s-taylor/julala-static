@@ -12,5 +12,6 @@ $(document).ready ->
   Julala.appView = new Julala.Views.appView()
   Julala.appView.render()
 
-  Julala.homeView = new Julala.Views.homeView()
-  Julala.homeView.render()  
+  #start the router
+  Julala.router = new Julala.Routers.appRouter()
+  Backbone.history.start pushState: false
