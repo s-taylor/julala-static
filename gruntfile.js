@@ -62,10 +62,16 @@ module.exports = function(grunt) {
         dest: 'build/lib',
         expand: true
       },
+      img: {
+        cwd: 'source/img',
+        src: [ '**' ],
+        dest: 'build/img',
+        expand: true
+      },
       //FOR DIST
       dist: {
         cwd: 'build',
-        src: [ '**/*.html', 'lib/**' ],
+        src: [ '**/*.html', 'lib/**', 'img/**' ],
         dest: 'dist',
         expand: true
       }
@@ -225,7 +231,7 @@ module.exports = function(grunt) {
   grunt.registerTask(
     'copy_build', 
     'perform copy operations for build (ignore dist copy)', 
-    [ 'copy:html', 'copy:sheets', 'copy:scripts', 'copy:lib' ]
+    [ 'copy:html', 'copy:sheets', 'copy:scripts', 'copy:lib', 'copy:img' ]
   );
 
   grunt.registerTask(
